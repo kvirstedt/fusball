@@ -1,6 +1,39 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Fusball</span>
+        </div>
+      </header>
+
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Fusball</span>
+        <nav class="mdl-navigation">
+          <router-link
+            class="mdl-navigation__link"
+            to="/current"
+            @click.native="hideMenu"
+          >
+            Pågående matcher
+          </router-link>
+          <router-link
+            class="mdl-navigation__link"
+            to="/today"
+            @click.native="hideMenu"
+          >
+            Dagens matcher
+          </router-link>
+        </nav>
+      </div>
+
+      <main class="mdl-layout__content">
+        <div class="page-content">
+          <router-view/>
+        </div>
+      </main>
+
+    </div>
   </div>
 </template>
 
@@ -12,6 +45,13 @@ export default {
   components: {
     LandingView,
   },
+  methods: {
+  hideMenu: function (event) {
+    document.getElementsByClassName('mdl-layout__drawer')[0].classList.remove('is-visible')
+    document.getElementsByClassName('mdl-layout__obfuscator')[0].classList.remove('is-visible')
+  },
+}
+
 }
 </script>
 

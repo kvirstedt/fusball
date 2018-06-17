@@ -24,8 +24,11 @@ const api = {
     getMatches() {
       return api.get('/matches')
     },
-    getCurrent() {
+    getCurrentMatches() {
       return api.get(`/matches/current`)
+    },
+    getTodaysMatches() {
+      return api.get(`/matches/today`)
     },
   },
 }

@@ -22,17 +22,9 @@ export default {
     MatchCard,
   },
   created () {
-    console.log('created')
-    this.$store.dispatch('fetchCurrentMatches')
     this.$store.dispatch('fetchTodaysMatches')
   },
   computed: {
-    matches () {
-      return this.$store.state.matches
-    },
-    currentMatches () {
-      return this.$store.state.currentMatches
-    },
     todaysMatches () {
       return this.$store.state.todaysMatches
     }
