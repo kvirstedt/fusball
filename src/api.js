@@ -20,7 +20,7 @@ const api = {
     return axios.delete(this.url(path), { params: params })
   },
 
-  notes: {
+  matches: {
     getMatches() {
       return api.get('/matches')
     },
