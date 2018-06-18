@@ -1,5 +1,8 @@
 <template>
-  <div class="events">
+  <div 
+    class="events"
+    :class="{ awayteam: awayTeam }"
+  >
     <ul class="mdl-list">
       <li 
         class="mdl-list__item--two-line"
@@ -25,6 +28,10 @@ export default {
     events: {
       type: Array,
       required: true,
+    },
+    awayTeam: {
+      type: Boolean,
+      default: false,
     }
   }
 
@@ -35,7 +42,10 @@ export default {
 <style lang="scss" scoped>
 .events {
   width: 100%;
-  border: solid 1px red;
+  // border: solid 1px red;
+}
+.awayteam {
+  text-align: right;
 }
 .mdl-list__item--two-line {
   height: 40px !important;

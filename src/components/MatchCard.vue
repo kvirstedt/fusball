@@ -22,12 +22,15 @@
     </div>
     <div class="mdl-card__suporting-text">
       <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--5-col mdl-cell--8-col-phone">
+        <div class="mdl-cell mdl-cell--5-col mdl-cell--2-col-phone">
           <Events :events="match.home_team_events"/>
         </div>
-        <div class="mdl-cell mdl-cell--2-col"/>
-        <div class="mdl-cell mdl-cell--5-col mdl-cell--8-col-phone">
-          <Events :events="match.away_team_events"/>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell mdl-cell--hide-phone"/>
+        <div class="mdl-cell mdl-cell--5-col mdl-cell--2-col-phone">
+          <Events 
+            :events="match.away_team_events" 
+            :away-team="true"
+          />
         </div>
       </div>
     </div>
