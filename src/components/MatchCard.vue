@@ -3,12 +3,14 @@
     <div class="mdl-title">
       <h2 class="mdl-card__title-text">
         <img 
+          v-if="homeTeamFlag"
           :src="homeTeamFlag" 
           width="40"
           height="25" 
         >
         {{ match.home_team.country }} - {{ match.away_team.country }}
         <img 
+          v-if="awayTeamFlag"
           :src="awayTeamFlag" 
           width="40"
           height="25" 
@@ -17,6 +19,17 @@
       <h2 class="mdl-card__title-text">
         {{ match.home_team.goals }} - {{ match.away_team.goals }}
       </h2>
+    </div>
+    <div class="mdl-card__suporting-text">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--5-col mdl-cell--8-col-phone">
+          <Events :events="match.home_team_events"/>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col"/>
+        <div class="mdl-cell mdl-cell--5-col mdl-cell--8-col-phone">
+          <Events :events="match.away_team_events"/>
+        </div>
+      </div>
     </div>
 
     <div class="mdl-card__suporting-text">
@@ -34,6 +47,15 @@
           </span>  
         </li>
       </ul>
+      {{ match.time }}
+    </div>
+    <div 
+      v-if="match.status === 'in progress'"
+      class="mdl-card__actions mdl-card--border"
+    >
+      <span class="live">
+        LIVE
+      </span>
     </div>
   </div>
 </template>
@@ -41,6 +63,7 @@
 <script>
 import moment from 'moment'
 import utils from '@/utils'
+import Events from '@/components/Events'
 
 export default {
   name: 'MatchCard',
@@ -50,17 +73,34 @@ export default {
       required: true,
     }
   },
+  components: {
+    Events,
+  },
   computed: {
     startTime () {
       moment.locale('sv-SE')
       return moment(this.match.datetime).calendar()
     },
     homeTeamFlag () {
-      return utils.fetchFlagUrl(this.match.home_team.code)
+      let flag = this.$store.getters.getFlag(this.match.home_team.country)
+      if (!flag) {
+        if (this.match.home_team.code === 'TBD') {
+          return ''
+        }
+        flag = utils.fetchFlagUrl(this.match.home_team.code)
+      }
+      return flag
     },
     awayTeamFlag () {
-      return utils.fetchFlagUrl(this.match.away_team.code)
-    }
+      let flag = this.$store.getters.getFlag(this.match.away_team.country)
+      if (!flag) {
+        if (this.match.home_team.code === 'TBD') {
+          return ''
+        }
+        flag = utils.fetchFlagUrl(this.match.away_team.code)
+      }
+      return flag
+    },
   },
   // data () {
   //   return {
@@ -75,8 +115,16 @@ export default {
   width: 100%;
 }
 
-.done {
-  background-color: lightgray;
+.live {
+  color: red;
+  font-weight: bold;
+  animation: blinker 2s linear infinite;
+  margin-left: 1rem;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
 
 .mdl-title {

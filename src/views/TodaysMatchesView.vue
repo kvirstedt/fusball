@@ -5,6 +5,7 @@
       class="mdl-spinner mdl-js-spinner is-active"
     />
     <div 
+      v-if="todaysMatches"
       :key="match.fifa_id" 
       v-for="match in todaysMatches"
     >

@@ -5,6 +5,9 @@ export default {
     'in progress',
   ],
   fetchFlagUrl: (code) => {
+    if (code === 'ENG') {
+      code = 'gbr'
+    }
     return `https://restcountries.eu/data/${code.toLowerCase()}.svg`
-  }
+  },
 }

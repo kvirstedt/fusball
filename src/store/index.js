@@ -9,8 +9,17 @@ export default new Vuex.Store({
     matches: null,
     currentMatches: null,
     todaysMatches: null,
+    countries: null,
   },
   getters: {
+    getFlag: (state) => (countryName) => {
+      if (state.countries) {
+        let c = state.countries.find(country => country.name === countryName)
+        if (c && c.flag) {
+          return c.flag
+        }
+      }
+    }
   },
   mutations: {
     SET_MATCHES (state, matches) {
@@ -22,6 +31,9 @@ export default new Vuex.Store({
     SET_TODAYS_MATCHES (state, matches) {
       state.todaysMatches = matches
     },
+    SET_COUNTRIES (state, countries) {
+      state.countries = countries
+    }
   },
   actions: {
     fetchMatches ({commit}) {
@@ -41,7 +53,13 @@ export default new Vuex.Store({
         .then(({data: matches}) => {
           commit('SET_TODAYS_MATCHES', matches)
         })
-    }
+    },
+    fetchCountries ({commit}) {
+      return api.country.getCountries()
+        .then(({data: countries}) => {
+          commit('SET_COUNTRIES', countries)
+        })
+    },
   },
   modules: {
   }

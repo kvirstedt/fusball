@@ -52,6 +52,10 @@
 <script>
 export default {
   name: 'App',
+  created () {
+    console.log('creating App')
+    this.$store.dispatch('fetchCountries')
+  },
   methods: {
   hideMenu: function (event) {
     document.getElementsByClassName('mdl-layout__drawer')[0].classList.remove('is-visible')

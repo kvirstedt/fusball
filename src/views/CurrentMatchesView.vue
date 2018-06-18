@@ -28,9 +28,13 @@ export default {
   created () {
     console.log('created')
     this.$store.dispatch('fetchCurrentMatches')
+    setInterval(function () {
+      this.$store.dispatch('fetchCurrentMatches')
+    }.bind(this), 30000)
   },
   computed: {
     currentMatches () {
+      console.log(this.$store.state.currentMatches)
       return this.$store.state.currentMatches
     },
   },

@@ -6,6 +6,7 @@
     />
 
     <div 
+      v-if="allMatches"
       :key="match.fifa_id" 
       v-for="match in allMatches"
     >

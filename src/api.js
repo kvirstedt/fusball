@@ -1,36 +1,36 @@
 import axios from 'axios'
 
 const api = {
-  BASE_URL: 'http://worldcup.sfg.io',
+  MATCH_BASE_URL: 'http://worldcup.sfg.io',
+  COUNTRY_BASE_URL: 'https://restcountries.eu/rest/v2',
 
-  url(path) {
-    return `${this.BASE_URL}${path}`
+  getMatchApi(path) {
+    return axios.get(`${this.MATCH_BASE_URL}${path}`)
   },
-
-  get(path, params) {
-    return axios.get(this.url(path), { params: params })
-  },
-  post(path, params) {
-    return axios.post(this.url(path), { params: params })
-  },
-  put(path, params) {
-    return axios.put(this.url(path), { params: params })
-  },
-  del(path, params) {
-    return axios.delete(this.url(path), { params: params })
+  getCountryApi(path) {
+    return axios.get(`${this.COUNTRY_BASE_URL}${path}`)
   },
 
   matches: {
     getMatches() {
-      return api.get('/matches?by_date=asc')
+      return api.getMatchApi('/matches')
     },
     getCurrentMatches() {
-      return api.get(`/matches/current`)
+      return api.getMatchApi(`/matches/current`)
     },
     getTodaysMatches() {
-      return api.get(`/matches/today`)
+      return api.getMatchApi(`/matches/today`)
     },
   },
+
+  country: {
+    getCountry(country) {
+      return api.getCountryApi(`/name/${country}`)
+    },
+    getCountries(country) {
+      return api.getCountryApi(`/all`)
+    },
+  }
 }
 
 export default api
