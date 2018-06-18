@@ -22,7 +22,7 @@ const api = {
 
   matches: {
     getMatches() {
-      return api.get('/matches')
+      return api.get('/matches?by_date=asc')
     },
     getCurrentMatches() {
       return api.get(`/matches/current`)

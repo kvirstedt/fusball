@@ -1,12 +1,13 @@
 <template>
   <div>
     <div 
-      v-if="!todaysMatches" 
+      v-if="!allMatches" 
       class="mdl-spinner mdl-js-spinner is-active"
     />
+
     <div 
       :key="match.fifa_id" 
-      v-for="match in todaysMatches"
+      v-for="match in allMatches"
     >
       <MatchCard :match="match"/>
       <p/>
@@ -23,11 +24,12 @@ export default {
     MatchCard,
   },
   created () {
-    this.$store.dispatch('fetchTodaysMatches')
+    console.log('created')
+    this.$store.dispatch('fetchMatches')
   },
   computed: {
-    todaysMatches () {
-      return this.$store.state.todaysMatches
+    allMatches () {
+      return this.$store.state.matches
     }
   },
   methods: {
@@ -36,5 +38,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.mdl-spinner {
+  justify-content: center;
+}
 
 </style>

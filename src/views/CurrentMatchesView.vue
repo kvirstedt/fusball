@@ -1,7 +1,6 @@
 <template>
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--1-col-tablet mdl-cell--hide-phone"/>
-    <div class="mdl-cell mdl-cell--4-col">
+  <div>
+    <div v-if="currentMatches && currentMatches.length > 0">
       <div 
         :key="match.fifa_id" 
         v-for="match in currentMatches"
@@ -10,18 +9,24 @@
         <p/>
       </div>
     </div>
+    <div v-else>
+      <NoMatchCard :card-text="noMatchesText"/>
+    </div>
   </div>
 </template>
 
 <script>
 import MatchCard from '@/components/MatchCard'
+import NoMatchCard from '@/components/NoMatchCard'
 
 export default {
   name: 'LandingView',
   components: {
     MatchCard,
+    NoMatchCard,
   },
   created () {
+    console.log('created')
     this.$store.dispatch('fetchCurrentMatches')
   },
   computed: {
@@ -29,8 +34,11 @@ export default {
       return this.$store.state.currentMatches
     },
   },
-  methods: {
-  },
+  data () {
+    return {
+      noMatchesText: 'Inga lir för tillfället',
+    }
+  }
 }
 </script>
 

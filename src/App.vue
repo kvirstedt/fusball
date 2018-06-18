@@ -24,12 +24,24 @@
           >
             Dagens matcher
           </router-link>
+          <router-link
+            class="mdl-navigation__link"
+            to="/all"
+            @click.native="hideMenu"
+          >
+            Alla matcher
+          </router-link>
         </nav>
       </div>
 
       <main class="mdl-layout__content">
         <div class="page-content">
-          <router-view/>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--hide-phone"/>
+            <div class="mdl-cell mdl-cell--4-col">
+              <router-view/>
+            </div>
+          </div>
         </div>
       </main>
 
@@ -38,13 +50,8 @@
 </template>
 
 <script>
-import LandingView from './views/LandingView.vue'
-
 export default {
   name: 'App',
-  components: {
-    LandingView,
-  },
   methods: {
   hideMenu: function (event) {
     document.getElementsByClassName('mdl-layout__drawer')[0].classList.remove('is-visible')
