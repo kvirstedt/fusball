@@ -5,6 +5,7 @@
         <img 
           v-if="homeTeamFlag"
           :src="homeTeamFlag" 
+          class="flag"
           width="40"
           height="25" 
         >
@@ -12,6 +13,7 @@
         <img 
           v-if="awayTeamFlag"
           :src="awayTeamFlag" 
+          class="flag"
           width="40"
           height="25" 
         >
@@ -131,14 +133,18 @@ export default {
 }
 
 .mdl-title {
-  padding: 1rem;
-  h2 {
+  padding-top: 1rem;
+  .mdl-card__title-text {
     justify-content:center; 
+    font-size: 20px;
     img {
       padding-left: 1rem;
       padding-right: 1rem;
     }
   }
 }
+// .flag {
+//   border: solid 1px gray;
+// }
 </style>
 

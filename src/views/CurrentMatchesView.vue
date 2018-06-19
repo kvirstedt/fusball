@@ -20,7 +20,7 @@ import MatchCard from '@/components/MatchCard'
 import NoMatchCard from '@/components/NoMatchCard'
 
 export default {
-  name: 'LandingView',
+  name: 'CurrentMatchesView',
   components: {
     MatchCard,
     NoMatchCard,

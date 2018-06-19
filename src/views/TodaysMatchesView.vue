@@ -19,16 +19,23 @@
 import MatchCard from '@/components/MatchCard'
 
 export default {
-  name: 'LandingView',
+  name: 'TodaysMatchesView',
   components: {
     MatchCard,
   },
   created () {
+    console.log('created TodaysMatchesView')
     this.$store.dispatch('fetchTodaysMatches')
   },
   computed: {
     todaysMatches () {
-      return this.$store.state.todaysMatches
+      // TODO: FIXME 
+      let ret = this.$store.state.todaysMatches
+      if (typeof ret !== 'string') {
+        return ret
+      }else{
+        return null
+      }
     }
   },
   methods: {
