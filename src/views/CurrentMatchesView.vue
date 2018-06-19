@@ -34,8 +34,7 @@ export default {
   },
   computed: {
     currentMatches () {
-      console.log(this.$store.state.currentMatches)
-      return this.$store.state.currentMatches
+      return this.$store.getters.getCurrentMatches
     },
   },
   data () {

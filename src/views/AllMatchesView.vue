@@ -25,12 +25,11 @@ export default {
     MatchCard,
   },
   created () {
-    console.log('created')
     this.$store.dispatch('fetchMatches')
   },
   computed: {
     allMatches () {
-      return this.$store.state.matches
+      return this.$store.getters.getAllMatches
     }
   },
   methods: {

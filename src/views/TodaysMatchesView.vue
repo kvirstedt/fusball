@@ -24,18 +24,11 @@ export default {
     MatchCard,
   },
   created () {
-    console.log('created TodaysMatchesView')
     this.$store.dispatch('fetchTodaysMatches')
   },
   computed: {
     todaysMatches () {
-      // TODO: FIXME 
-      let ret = this.$store.state.todaysMatches
-      if (typeof ret !== 'string') {
-        return ret
-      }else{
-        return null
-      }
+      return this.$store.getters.getTodaysMatches
     }
   },
   methods: {
