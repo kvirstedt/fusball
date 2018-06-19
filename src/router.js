@@ -14,7 +14,7 @@ const router = new Router({
     {
       path: '/',
       name: 'LandingView',
-      component: CurrentMatchesView,
+      component: TodaysMatchesView,
     },
     {
       path: '/current',
