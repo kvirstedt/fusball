@@ -26,7 +26,7 @@ export default {
   created () {
     this.$store.dispatch('fetchTodaysMatches')
     setInterval(function () {
-      this.$store.dispatch('fetchCurrentMatches')
+      this.$store.dispatch('fetchTodaysMatches')
     }.bind(this), 30000)
   },
   computed: {

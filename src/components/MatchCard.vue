@@ -10,7 +10,13 @@
           width="40"
           height="25" 
         >
-        {{ match.home_team.country }} - {{ match.away_team.country }} 
+        <router-link :to="{ name: 'TeamMatchesView', params: { fifa_id: match.home_team.code }}">
+          {{ match.home_team.country }}
+        </router-link>
+        <span> - </span>
+        <router-link :to="{ name: 'TeamMatchesView', params: { fifa_id: match.away_team.code }}">
+          {{ match.away_team.country }}
+        </router-link>
         <img 
           v-if="awayTeamFlag"
           :src="awayTeamFlag" 
@@ -56,7 +62,7 @@
         <li class="mdl-list__item">
           <i class="material-icons mdl-list__item-icon">date_range</i>
           <span class="mdl-list__item-primary-content">
-            Tid: {{ startTime }}
+            Datum: {{ startTime }}
           </span>  
         </li>
       </ul>
@@ -92,7 +98,8 @@ export default {
   computed: {
     startTime () {
       moment.locale('sv-SE')
-      return moment(this.match.datetime).calendar()
+      // return moment(this.match.datetime).calendar()
+      return moment(this.match.datetime).format('dddd, D MMMM ')
     },
     homeTeamFlag () {
       let flag = this.$store.getters.getFlag(this.match.home_team.country)
@@ -142,6 +149,11 @@ export default {
       lastTeamToScore: '',
     }
   },
+  methods: {
+    teamClick () {
+
+    },
+  }
 }
 </script>
 
@@ -177,6 +189,10 @@ export default {
     img {
       padding-left: 1rem;
       padding-right: 1rem;
+    }
+    a {
+      text-decoration: none; 
+      color: black;
     }
   }
 }

@@ -12,6 +12,7 @@ export default new Vuex.Store({
     allMatches: [],
     currentMatches: [],
     todaysMatches: [],
+    teamMatches: null,
     countries: [],
   },
   getters: {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     getCurrentMatches: (state) => {
       return stateCache.get(state, 'currentMatches')
+    },
+    getTeamMatches: (state) => {
+      return state.teamMatches
     },
     getFlag: (state) => (countryName) => {
       const countries = stateCache.get(state, 'countries')
@@ -44,9 +48,12 @@ export default new Vuex.Store({
     SET_TODAYS_MATCHES (state, matches) {
       stateCache.set(state, 'todaysMatches', matches)
     },
+    SET_TEAM_MATCHES(state, teamMatches) {
+      state.teamMatches = teamMatches
+    },
     SET_COUNTRIES (state, countries) {
       stateCache.set(state, 'countries', countries)
-    }
+    },
   },
   actions: {
     fetchAllMatches ({state, commit}) {
@@ -89,6 +96,12 @@ export default new Vuex.Store({
         .then(({data: matches}) => {
           commit('SET_TODAYS_MATCHES', matches)
           stateCache.setFetched('todaysMatches')
+        })
+    },
+    fetchTeamMatches({state, commit}, team) {
+      return api.team.getTeamMatches(team)
+        .then(({data: fetchedTeamMatches}) => {
+          commit('SET_TEAM_MATCHES', fetchedTeamMatches)
         })
     },
     fetchCountries ({state, commit}) {

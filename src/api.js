@@ -23,6 +23,12 @@ const api = {
     },
   },
 
+  team: {
+    getTeamMatches (team) {
+      return api.getMatchApi(`/matches/country?fifa_code=${team}`)
+    },
+  },
+
   country: {
     getCountry(country) {
       return api.getCountryApi(`/name/${country}`)
