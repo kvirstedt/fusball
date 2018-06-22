@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 class StateCache {
-  constructor () {
+  constructor (prop = null) {
     this.fetching = {}
     this.expireMs = 29 * 1000
   }
@@ -28,6 +28,19 @@ class StateCache {
     }
     return false
   }
+
+  isFetching(state) {
+    return Boolean(this.fetching[state])
+  }
+
+  setFetching(state) {
+    this.fetching[state] = true
+  }
+
+  setFetched(state) {
+    delete this.fetching[state]
+  }
+  
 }
 
 export default {

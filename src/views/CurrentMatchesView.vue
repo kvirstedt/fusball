@@ -10,7 +10,7 @@
       </div>
     </div>
     <div v-else>
-      <NoMatchCard :card-text="noMatchesText"/>
+      <NoMatchCard/>
     </div>
   </div>
 </template>
@@ -37,11 +37,6 @@ export default {
       return this.$store.getters.getCurrentMatches
     },
   },
-  data () {
-    return {
-      noMatchesText: 'Inga lir för tillfället',
-    }
-  }
 }
 </script>
 

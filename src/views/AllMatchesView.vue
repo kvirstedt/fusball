@@ -25,7 +25,7 @@ export default {
     MatchCard,
   },
   created () {
-    this.$store.dispatch('fetchMatches')
+    this.$store.dispatch('fetchAllMatches')
   },
   computed: {
     allMatches () {

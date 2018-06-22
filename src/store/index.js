@@ -12,7 +12,7 @@ export default new Vuex.Store({
     allMatches: [],
     currentMatches: [],
     todaysMatches: [],
-    countries: null,
+    countries: [],
   },
   getters: {
     getAllMatches: (state) => {
@@ -25,8 +25,9 @@ export default new Vuex.Store({
       return stateCache.get(state, 'currentMatches')
     },
     getFlag: (state) => (countryName) => {
-      if (state.countries) {
-        let c = state.countries.find(country => country.name === countryName)
+      const countries = stateCache.get(state, 'countries')
+      if (countries) {
+        let c = countries.find(country => country.name === countryName)
         if (c && c.flag) {
           return c.flag
         }
@@ -34,7 +35,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SET_MATCHES (state, matches) {
+    SET_ALL_MATCHES (state, matches) {
       stateCache.set(state, 'allMatches', matches)
     },
     SET_CURRENT_MATCHES (state, matches) {
@@ -44,41 +45,64 @@ export default new Vuex.Store({
       stateCache.set(state, 'todaysMatches', matches)
     },
     SET_COUNTRIES (state, countries) {
-      state.countries = countries
+      stateCache.set(state, 'countries', countries)
     }
   },
   actions: {
-    fetchMatches ({state, commit}) {
+    fetchAllMatches ({state, commit}) {
       if (stateCache.isFresh(state, 'allMatches')) {
         return
       }
+      if (stateCache.isFetching('allMatches')) {
+        return
+      }
+      stateCache.setFetching('allMatches')
       return api.matches.getMatches()
         .then(({data: matches}) => {
-          commit('SET_MATCHES', matches)
+          commit('SET_ALL_MATCHES', matches)
+          stateCache.setFetched('allMatches')
         })
     },
     fetchCurrentMatches ({state, commit}) {
       if (stateCache.isFresh(state, 'currentMatches')) {
         return
       }
+      if (stateCache.isFetching('currentMatches')) {
+        return
+      }
+      stateCache.setFetching('currentMatches')
       return api.matches.getCurrentMatches()
         .then(({data: matches}) => {
           commit('SET_CURRENT_MATCHES', matches)
+          stateCache.setFetched('currentMatches')
         })
     },
     fetchTodaysMatches ({state, commit}) {
       if (stateCache.isFresh(state, 'todaysMatches')) {
         return
       }
+      if (stateCache.isFetching('todaysMatches')) {
+        return
+      }
+      stateCache.setFetching('todaysMatches')
       return api.matches.getTodaysMatches()
         .then(({data: matches}) => {
           commit('SET_TODAYS_MATCHES', matches)
+          stateCache.setFetched('todaysMatches')
         })
     },
-    fetchCountries ({commit}) {
+    fetchCountries ({state, commit}) {
+      if (stateCache.isFresh(state, 'countries')) {
+        return
+      }
+      if (stateCache.isFetching('countries')) {
+        return
+      }
+      stateCache.setFetching('countries')
       return api.country.getCountries()
         .then(({data: countries}) => {
           commit('SET_COUNTRIES', countries)
+          stateCache.setFetched('countries')
         })
     },
   },

@@ -10,11 +10,11 @@
         :key="event.id"
       >
         <span class="mdl-list__item-primary-content">
-          <span>{{ event.type_of_event }}</span>
+          {{ event.time }} {{ event.type_of_event }}
           <span class="mdl-list__item-sub-title">
-            {{ event.time }}
+            {{ event.player }} 
           </span>  
-        </span>  
+        </span>
       </li>
     </ul>
   </div>
@@ -45,10 +45,10 @@ export default {
   // border: solid 1px red;
 }
 .awayteam {
-  text-align: right;
+  // text-align: right;
 }
 .mdl-list__item--two-line {
-  height: 40px !important;
+  height: 50px !important;
 }
 
 </style>
