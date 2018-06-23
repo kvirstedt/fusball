@@ -29,7 +29,6 @@
         <div :class="{blink: lastTeamToScore === 'home'}">
           {{ match.home_team.goals }}
         </div>
-        - 
         <div :class="{blink: lastTeamToScore === 'away'}">
           {{ match.away_team.goals }}
         </div>
@@ -98,8 +97,8 @@ export default {
   computed: {
     startTime () {
       moment.locale('sv-SE')
-      // return moment(this.match.datetime).calendar()
-      return moment(this.match.datetime).format('dddd, D MMMM ')
+      return moment(this.match.datetime).calendar()
+      // return moment(this.match.datetime).format('dddd, D MMMM ')
     },
     homeTeamFlag () {
       let flag = this.$store.getters.getFlag(this.match.home_team.country)
@@ -162,12 +161,6 @@ export default {
   width: 100%;
 }
 
-.teamShits {
-  justify-content: center;
-  border: solid 1px red;
-  width:100%;
-}
-
 .live {
   color: red;
   font-weight: bold;
@@ -184,7 +177,7 @@ export default {
 .mdl-title {
   padding-top: 1rem;
   .mdl-card__title-text {
-    justify-content:center; 
+    justify-content: space-evenly; 
     font-size: 20px;
     img {
       padding-left: 1rem;
