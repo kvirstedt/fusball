@@ -2,7 +2,7 @@
   <div class="mdl-card mdl-shadow--2dp">
     <div class="mdl-title">
       <h2 class="mdl-card__title-text">
-        Ingen pågående match
+        Inga pågående matcher
       </h2>
     </div>
   </div>

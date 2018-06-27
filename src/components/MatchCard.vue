@@ -13,7 +13,6 @@
         <router-link :to="{ name: 'TeamMatchesView', params: { fifa_id: match.home_team.code }}">
           {{ match.home_team.country }}
         </router-link>
-        <span> - </span>
         <router-link :to="{ name: 'TeamMatchesView', params: { fifa_id: match.away_team.code }}">
           {{ match.away_team.country }}
         </router-link>
@@ -185,7 +184,9 @@ export default {
     }
     a {
       text-decoration: none; 
-      color: black;
+      color:black;
+      margin-left: 5px;
+      margin-right: 5px;
     }
   }
 }
