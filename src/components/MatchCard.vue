@@ -25,10 +25,16 @@
         >
       </h2>
       <h2 class="mdl-card__title-text">
-        <div :class="{blink: lastTeamToScore === 'home'}">
+        <div 
+          class="score"
+          :class="{blink: lastTeamToScore === 'home'}"
+        >
           {{ match.home_team.goals }}
         </div>
-        <div :class="{blink: lastTeamToScore === 'away'}">
+        <div 
+          class="score"
+          :class="{blink: lastTeamToScore === 'away'}"
+        >
           {{ match.away_team.goals }}
         </div>
       </h2>
@@ -172,6 +178,10 @@ export default {
   50% {
     opacity: 0;
   }
+}
+.score {
+  margin-top:10px;
+  font-size: 25px;
 }
 .mdl-title {
   padding-top: 1rem;
