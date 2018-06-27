@@ -25,9 +25,19 @@ export default {
   },
   created () {
     this.$store.dispatch('fetchTodaysMatches')
-    setInterval(function () {
+    this.intervalId = setInterval(function () {
       this.$store.dispatch('fetchTodaysMatches')
     }.bind(this), 30000)
+  },
+  destroyed () {
+    if (this.intervalId) {
+      clearInterval(this.intervalId)
+    }
+  },
+  data () {
+    return {
+      intervalId: null,
+    }
   },
   computed: {
     todaysMatches () {

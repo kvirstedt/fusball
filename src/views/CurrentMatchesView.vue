@@ -28,9 +28,21 @@ export default {
   created () {
     console.log('created')
     this.$store.dispatch('fetchCurrentMatches')
-    setInterval(function () {
+    this.intervalId = setInterval(function () {
       this.$store.dispatch('fetchCurrentMatches')
     }.bind(this), 30000)
+  },
+  destroyed () {
+    console.log('destroyed')
+    console.log(this.intervalId)
+    if (this.intervalId) {
+      clearInterval(this.intervalId)
+    }
+  },
+  data () {
+    return {
+      intervalId: null,
+    }
   },
   computed: {
     currentMatches () {
