@@ -1,7 +1,12 @@
 <template>
   <div>
+    <div 
+      v-if="loading" 
+      class="mdl-spinner mdl-js-spinner is-active"
+    />
     <div v-if="currentMatches && currentMatches.length > 0">
       <div 
+        v-if="false"
         :key="match.fifa_id" 
         v-for="match in currentMatches"
       >
@@ -26,7 +31,11 @@ export default {
     NoMatchCard,
   },
   created () {
+    this.loading = true
     this.$store.dispatch('fetchCurrentMatches')
+      .then(() => {
+        this.loading = false
+      })
     this.intervalId = setInterval(function () {
       this.$store.dispatch('fetchCurrentMatches')
     }.bind(this), 30000)
@@ -39,6 +48,7 @@ export default {
   data () {
     return {
       intervalId: null,
+      loading: false,
     }
   },
   computed: {

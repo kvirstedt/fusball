@@ -2,7 +2,7 @@
   <div class="mdl-card mdl-shadow--2dp">
     <div class="mdl-title">
       <h2 class="mdl-card__title-text">
-        Inga pågående matcher
+        {{ label }}
       </h2>
     </div>
   </div>
@@ -14,6 +14,10 @@ import moment from 'moment'
 export default {
   name: 'NoMatchCard',
   props: {
+    label: {
+      type: String,
+      default: 'Inga pågående matcher'
+    }
   },
 }
 </script>
