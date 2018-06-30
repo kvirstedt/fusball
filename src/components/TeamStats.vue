@@ -67,9 +67,6 @@ export default {
   components: {
     StatList,
   },
-  created () {
-    console.log(this.stats)
-  }
 }
 </script>
 
