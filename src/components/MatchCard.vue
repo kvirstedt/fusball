@@ -24,7 +24,7 @@
           height="25" 
         >
       </h2>
-      <h2 class="mdl-card__title-text">
+      <h2 class="mdl-card__title-text score-container">
         <div 
           class="score"
           :class="{blink: lastTeamToScore === 'home'}"
@@ -40,7 +40,53 @@
       </h2>
     </div>
 
-    <div class="mdl-card__suporting-text">
+    <div 
+      class="button-container"
+      v-if="match.status != 'future'"
+    >
+      <button 
+        class="mdl-button mdl-js-button"
+        @click="showStats=!showStats"
+      >
+        Statistik
+      </button>
+    </div>
+    <div
+      v-if="showStats"
+      class="mdl-card__suporting-text"
+    >
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--5-col mdl-cell--2-col-phone">
+          <TeamStats
+            v-if="match.home_team_statistics"
+            :stats="match.home_team_statistics"
+          />
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell mdl-cell--hide-phone"/>
+        <div class="mdl-cell mdl-cell--5-col mdl-cell--2-col-phone">
+          <TeamStats
+            v-if="match.away_team_statistics"
+            :stats="match.away_team_statistics"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div 
+      class="button-container"
+      v-if="match.status != 'future'"
+    >
+      <button 
+        class="mdl-button mdl-js-button"
+        @click="showEvents=!showEvents"
+      >
+        Händelser
+      </button>
+    </div>
+    <div 
+      class="mdl-card__suporting-text"
+      v-if="showEvents"
+    >
       <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--5-col mdl-cell--2-col-phone">
           <Events 
@@ -91,6 +137,7 @@
 import moment from 'moment'
 import utils from '@/utils'
 import Events from '@/components/Events'
+import TeamStats from '@/components/TeamStats'
 
 export default {
   name: 'MatchCard',
@@ -102,6 +149,7 @@ export default {
   },
   components: {
     Events,
+    TeamStats,
   },
   computed: {
     startTime () {
@@ -155,6 +203,8 @@ export default {
   data () {
     return {
       lastTeamToScore: '',
+      showStats: false,
+      showEvents: false,
     }
   },
   methods: {
@@ -183,6 +233,9 @@ export default {
     opacity: 0;
   }
 }
+.score-container {
+  margin-bottom: 15px;
+}
 .score {
   margin-top:10px;
   font-size: 25px;
@@ -203,6 +256,10 @@ export default {
       margin-right: 5px;
     }
   }
+}
+.button-container {
+  display:flex;
+  justify-content: center;
 }
 // .flag {
 //   border: solid 1px gray;
