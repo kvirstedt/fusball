@@ -6,7 +6,6 @@
     />
     <div v-if="currentMatches && currentMatches.length > 0">
       <div 
-        v-if="false"
         :key="match.fifa_id" 
         v-for="match in currentMatches"
       >
