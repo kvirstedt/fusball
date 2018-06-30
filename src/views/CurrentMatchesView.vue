@@ -14,7 +14,7 @@
         <p/>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="!loading">
       <NoMatchCard/>
     </div>
   </div>
